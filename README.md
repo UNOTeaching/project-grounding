@@ -23,7 +23,7 @@ python -c "import clingo; print(clingo.__version__)"
 ```
 If you are missing the ```clingo``` package, you can install it with ```pip```:
 ```bash
-python -m pip install clingo==5.6
+python -m pip install clingo==5.5
 ```
 The framework is composed of the following files:
 | file             | description           |
