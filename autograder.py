@@ -180,6 +180,7 @@ def main():
             success, failing_tests = question.eval()
             if success:
                 sys.stdout.write("SUCCESS\n")
+                return 0
             else:
                 sys.stdout.write("FAILURE\n")
                 sys.stdout.write("The following tests failed:\n")
@@ -189,6 +190,7 @@ def main():
                     "\nYou can get more information by running the test directly using the command:\n"
                 )
                 sys.stdout.write("   python -m unittest <name-of-failing-test>\n")
+                return 1
 
     except Exception as e:
         if len(e.args) >= 1:
