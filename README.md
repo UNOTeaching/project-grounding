@@ -85,6 +85,10 @@ a(2) :- b(2), not c(2).
 a(3) :- b(3), not c(3).
 ```
 You can access the head of any ```Rule``` object by accessing the attribute ```head```.
+For instance, if ```rule``` is a ```Rule``` object representing rule ```a(1) :- b(1), not c(1)```, then ```rule.head``` will return a list of size one containing the symbol ```a(1)```.
+Note that ```rule.head``` may be an empty list in the case that ```rule``` is a constraint.
+
+
 
 
 This class also has an abstract method ```_grounding_algorithm()``` that will be instantiated by its subclasses.
