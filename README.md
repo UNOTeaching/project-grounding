@@ -84,6 +84,9 @@ a(1) :- b(1), not c(1).
 a(2) :- b(2), not c(2).
 a(3) :- b(3), not c(3).
 ```
+You can access the head of any ```Rule``` object by accessing the attribute ```head```.
+
+
 This class also has an abstract method ```_grounding_algorithm()``` that will be instantiated by its subclasses.
 ```python
 def _grounding_algorithm(
