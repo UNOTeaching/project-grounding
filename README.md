@@ -278,7 +278,11 @@ python autograder.py --question=2d
 
 ## Question 3: Grounding using dependencies (30 points)
 
-You will implement now the grounding algorithm that takes into account the dependencies between rules. The algorithm is described in the lecture slides. You will implement the code in the function ```_grounding_algorithm()``` of the ```GrounderWithDependencies``` class. The code for this class is also in the file ```algorithms.py```.
+You will implement now the grounding algorithm that takes into account the dependencies between rules. The algorithm is described in the lecture slides. You will implement the code in the function ```_grounding_algorithm()``` of the ```GrounderWithDependencies``` class. The code for this class is also in the file ```algorithms.py```. Note that ```GrounderWithDependencies``` is a subclass of ```BottomUpGrounder```. You can execute the bottom up grounding algorithm by using ```super()```, that is, by invoking the method
+```python
+super()._grounding_algorithm(...)
+```
+Do not create a new object ```BottomUpGrounder``` in the class ```GrounderWithDependencies```.
 
 You can see the result of you algorithm by running
 ```sh
