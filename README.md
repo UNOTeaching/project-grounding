@@ -259,7 +259,7 @@ def sccs(self) -> list[list[T]]:
 ```
 from the ```Graph``` class in file ```tarjan.py```. You can check your code using the autograder by running command
 ```sh
-python grounder.py tests/ex/hc/encoding.lp --sccs
+python grounder.py sccs tests/ex/hc/encoding.lp
 ```
 The result should be the one shown above.
 
@@ -283,19 +283,19 @@ You will implement now the grounding algorithm that takes into account the depen
 
 You can see the result of you algorithm by running
 ```sh
-python grounder.py tests/ex/hc/{encoding.lp,instance01.lp} --algorithm=dependencies
+python grounder.py ground tests/ex/hc/{encoding.lp,instance01.lp} --algorithm=dependencies
 ```
 This should print 60 rules.
  You can count the number of rules with the commands
 ```sh
-python grounder.py tests/ex/hc/{encoding.lp,instance01.lp} --algorithm=dependencies | wc -l
+python grounder.py ground tests/ex/hc/{encoding.lp,instance01.lp} --algorithm=dependencies | wc -l
 ```
 These are the same 60 rules that are obtained with the bottom up algorithm. To see the difference between the two algorithms, you need to look at the number of rules that are computed during the process, instead of the final result. You can do this by running commands
 ```sh
-python grounder.py tests/ex/hc/{encoding.lp,instance01.lp} --algorithm=bottom-up
-python grounder.py tests/ex/hc/{encoding.lp,instance01.lp} --algorithm=dependencies
-python grounder.py tests/ex/hc/{encoding.lp,instance01.lp} --algorithm=bottom-up | wc -l
-python grounder.py tests/ex/hc/{encoding.lp,instance01.lp} --algorithm=dependencies | wc -l
+python grounder.py ground tests/ex/hc/{encoding.lp,instance01.lp}  --all-computed-rules --algorithm=bottom-up
+python grounder.py ground tests/ex/hc/{encoding.lp,instance01.lp}  --all-computed-rules --algorithm=dependencies
+python grounder.py ground tests/ex/hc/{encoding.lp,instance01.lp}  --all-computed-rules --algorithm=bottom-up | wc -l
+python grounder.py ground tests/ex/hc/{encoding.lp,instance01.lp}  --all-computed-rules --algorithm=dependencies | wc -l
 ```
 You can finally check your code using the autograder by running command
 ```sh

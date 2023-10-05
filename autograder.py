@@ -2,6 +2,8 @@
 
 import argparse
 import io
+import os
+import shutil
 import sys
 import unittest
 from abc import ABC, abstractmethod
@@ -9,6 +11,14 @@ from typing import Optional
 
 if sys.version_info < (3, 9):
     raise SystemExit("Sorry, this code need Python 3.9 or higher")
+
+
+GITHUB_AUTOGRADE_DIR = os.path.join(".github", "classroom")
+GITHUB_AUTOGRADE_FILE = os.path.join(GITHUB_AUTOGRADE_DIR, "autograding.json")
+GITHUB_AUTOGRADE_BACK = os.path.join("github", "autograding.json")
+if not os.path.exists(GITHUB_AUTOGRADE_FILE):
+    os.makedirs(GITHUB_AUTOGRADE_DIR, exist_ok=True)
+    shutil.copy(GITHUB_AUTOGRADE_BACK, GITHUB_AUTOGRADE_FILE)
 
 
 class Question(ABC):
