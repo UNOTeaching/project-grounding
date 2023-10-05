@@ -2,7 +2,14 @@
 In this assignment, you will build a grounder form normal programs.
 
 ## Formalities.
-You can work on the solution alone or in groups of two people. Different groups have to submit different solutions. In case of plagiarism all groups involved will fail the project.
+You can work on the solution alone or in groups of two people. Different groups have to submit different solutions, in case of plagiarism all groups involved will fail the project.
+
+Before you start create a file ```group.txt``` with the names and NUIDs of the components of the group. If you are working alone, the file should contain a single line with your name. If you are working in a group, the file should contain two lines with the names of the two members of the group. The file should be located in the root directory of the repository and it should have the following format:
+```
+Vladimir lifschitz NUID: 00000001
+Michael Gelfond    NUID: 00000002
+```
+Do not write anything else in this file nor use any other format! Blank spaces do not matter for the format.
 
 Your code will be autograded for technical correctness. However, the correctness of your implementation -- not the autograder's judgments -- will be the final judge of your score. If necessary, we will review and grade assignments individually to ensure that you receive due credit for your work.
 
@@ -10,7 +17,7 @@ The content of the **main** branch of your GitHub repository at the time of the 
 
 **Start as soon as possible to avoid running out of time.**
 
-Do not modify the file ```autograder.py``` nor any of the content of the directories ```.git```, ```.github``` and  ```tests```. Modifying some of this directories may prevent your code to work or cause lost of your progress.
+Do not modify the file ```autograder.py``` nor any of the content of the directories ```.git```, ```.github```, ```img```, ```questions``` and ```tests```. Modifying some of this directories may prevent your code to work or cause lost of your progress.
 
 **Academic Dishonesty**: We will be checking your code against other submissions in the class for logical redundancy. If you copy someone else's code and submit it with minor changes, we will know. These cheat detectors are quite hard to fool, so please don't try. Modifying the behavior of the autograder in any way is also cheating. We trust you all to submit your own work only and to do it in honest way; please don't let us down. If you do, we will pursue the strongest consequences available to us.
 
@@ -23,13 +30,8 @@ python -c "import clingo; print(clingo.__version__)"
 ```
 If you are missing the ```clingo``` package, you can install it with ```pip```:
 ```bash
-python -m pip install clingo==5.5
+python -m pip install clingo==5.6.2
 ```
-It also requires the ```clingox``` package.  Tou can install it with ```pip```:
-```bash
-python -m pip install clingox
-```
-
 The framework is composed of the following files:
 | file             | description           |
 | ---------------- | ----------------------|
@@ -49,7 +51,7 @@ The framework is composed of the following files:
 | graph     | Computes and prints the dependency graph of a logic program |
 | sccs      | Computes and prints the strongly connected components of a logic program |
 
-None of these commands will not work when you first download the framework. You will need to implement the algorithms in ```algorithms.py``` to make them work. Once you have completed an algorithm, you can test it by running ```grounder.py``` with the corresponding subcommand. For instance, you can use the command
+None of these commands will work when you first download the framework. You will need to implement the algorithms in ```algorithms.py``` to make them work. Once you have completed an algorithm, you can test it by running ```grounder.py``` with the corresponding subcommand. For instance, you can use the command
 ```sh
 python grounder.py ground tests/ex/hc/{encoding.lp,instance01.lp}
 ```
@@ -61,6 +63,8 @@ Do not modify any file besides ```algorithms.py```. Modifying other files may ca
 We recommend that you create new commits frequently when doing the rest of this project. If at some point you realize you did a mistake, you can revert to a previous commit. Pushing to the GitHub repository may also help you in case that you accidentally lose your local copy. If you have doubts about Git or Github, or you can learn more about it, you can read the tutorial in following link:
 
 https://github.com/Advanced-Concepts-Programming-Languages/github-starter-course
+
+When submitting questions to the instructors be sure that your most recent code has been commited and pushed to GitHub. Send the link to your repository. Feedback may be added to your code in GitHub.
 
 ## Question 1: Bottom-up grounding (30 points)
 To begin with, you will be implemented the **bottom-up grounding** algorithm saw in class.
@@ -78,7 +82,7 @@ and ```atoms``` is a set of symbols ```a(1), b(1), b(2), b(3)```, then the call
 ```python
 self.instantiator.ground_rule(rule, atoms)
 ```
-returns a list containing a ```Rule``` object representing each of the following rules:
+returns a list containing a ```Rule``` object representing the following rules:
 ```
 a(1) :- b(1), not c(1).
 a(2) :- b(2), not c(2).
@@ -88,19 +92,16 @@ You can access the head of any ```Rule``` object by accessing the attribute ```h
 For instance, if ```rule``` is a ```Rule``` object representing rule ```a(1) :- b(1), not c(1)```, then ```rule.head``` will return a list of size one containing the symbol ```a(1)```.
 Note that ```rule.head``` may be an empty list in the case that ```rule``` is a constraint.
 
-
-
-
 This class also has an abstract method ```_grounding_algorithm()``` that will be instantiated by its subclasses.
 ```python
 def _grounding_algorithm(
     self, program: list[AST], atoms: set[Symbol] = frozenset()
 ) -> tuple[list[Rule], set[Symbol]]:
 ```
-**You should not modify class ```Grounder```.** 
+**You should not modify class ```Grounder```.**
 The class that you should modify to implement the bottom-up algorithm is the ```BottomUpGrounder```. In particular, you should write you code in the method ```_grounding_algorithm()```.
-This method receives a list of ```AST``` objects representing the ```program``` and a set of ```Symbol``` objects that represent the current set of relevant atoms. 
-It should return a pair. 
+This method receives a list of ```AST``` objects representing the ```program``` and a set of ```Symbol``` objects that represent the current set of relevant atoms.
+It should return a pair.
 The first component of this pair is the list of ground rules resulting for ground ```program``` with respect to ```atoms```.
 The second component of this pair is the set of head atoms occurring in the head of all rules in ```program```.
 
@@ -253,12 +254,12 @@ are in the same strongly connected component. You may noitice that this is diffe
 
 
 To obtain this list, you can use the function ```dependency_graph()``` you implemented in [Question 2b](#question-2b-dependency-graph-20-points) and the function
-```python
+```
 def sccs(self) -> list[list[T]]:
 ```
 from the ```Graph``` class in file ```tarjan.py```. You can check your code using the autograder by running command
 ```sh
-python grounder.py sccs tests/ex/hc/encoding.lp
+python grounder.py tests/ex/hc/encoding.lp --sccs
 ```
 The result should be the one shown above.
 
@@ -278,33 +279,23 @@ python autograder.py --question=2d
 
 ## Question 3: Grounding using dependencies (30 points)
 
-You will implement now the grounding algorithm that takes into account the dependencies between rules. The algorithm is described in the lecture slides. You will implement the code in the function ```_grounding_algorithm()``` of the ```GrounderWithDependencies``` class. The code for this class is also in the file ```algorithms.py```. Note that ```GrounderWithDependencies``` is a subclass of ```BottomUpGrounder```. You can execute the bottom up grounding algorithm by using ```super()```, that is, by invoking the method
-```python
-super()._grounding_algorithm(...)
-```
-Do not create a new object ```BottomUpGrounder``` in the class ```GrounderWithDependencies```.
+You will implement now the grounding algorithm that takes into account the dependencies between rules. The algorithm is described in the lecture slides. You will implement the code in the function ```_grounding_algorithm()``` of the ```GrounderWithDependencies``` class. The code for this class is also in the file ```algorithms.py```.
 
 You can see the result of you algorithm by running
 ```sh
-python grounder.py ground tests/ex/hc/{encoding.lp,instance01.lp} --algorithm=dependencies
+python grounder.py tests/ex/hc/{encoding.lp,instance01.lp} --algorithm=dependencies
 ```
 This should print 60 rules.
  You can count the number of rules with the commands
 ```sh
-python grounder.py ground tests/ex/hc/{encoding.lp,instance01.lp} --algorithm=dependencies | wc -l
+python grounder.py tests/ex/hc/{encoding.lp,instance01.lp} --algorithm=dependencies | wc -l
 ```
 These are the same 60 rules that are obtained with the bottom up algorithm. To see the difference between the two algorithms, you need to look at the number of rules that are computed during the process, instead of the final result. You can do this by running commands
 ```sh
-python grounder.py ground tests/ex/hc/{encoding.lp,instance01.lp} --all-computed-rules --algorithm=bottom-up
-```
-```sh
-python grounder.py ground tests/ex/hc/{encoding.lp,instance01.lp} --all-computed-rules --algorithm=dependencies
-```
-```sh
-python grounder.py ground tests/ex/hc/{encoding.lp,instance01.lp} --all-computed-rules --algorithm=bottom-up | wc -l
-```
-```sh
-python grounder.py ground tests/ex/hc/{encoding.lp,instance01.lp} --all-computed-rules --algorithm=dependencies | wc -l
+python grounder.py tests/ex/hc/{encoding.lp,instance01.lp} --algorithm=bottom-up
+python grounder.py tests/ex/hc/{encoding.lp,instance01.lp} --algorithm=dependencies
+python grounder.py tests/ex/hc/{encoding.lp,instance01.lp} --algorithm=bottom-up | wc -l
+python grounder.py tests/ex/hc/{encoding.lp,instance01.lp} --algorithm=dependencies | wc -l
 ```
 You can finally check your code using the autograder by running command
 ```sh

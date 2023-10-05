@@ -1,7 +1,17 @@
-from typing import List, Sequence, cast
+from typing import Callable, List, Sequence, Union, cast
 
-from clingo import ast
+from clingo import Control, Logger, ast
 from clingo.ast import AST, ASTType
+
+
+def parse_string(
+    program: str,
+    callback: Callable[[AST], None],
+    logger: Union[Logger, None] = None,
+    message_limit: int = 20,
+) -> None:
+    control: Control = None  # type: ignore
+    return ast.parse_string(program, callback, control, logger, message_limit)
 
 
 def parse_files(files: Sequence[str]) -> list[AST]:
@@ -9,7 +19,8 @@ def parse_files(files: Sequence[str]) -> list[AST]:
     Parse a statement.
     """
     stms: List[AST] = []
-    ast.parse_files(files, stms.append, lambda code, msg: None, 1)
+    control: Control = None  # type: ignore
+    ast.parse_files(files, stms.append, control, lambda code, msg: None, 1)  # type: ignore
     return [stm for stm in stms if stm.ast_type == ASTType.Rule]
 
 
@@ -18,7 +29,7 @@ def parse_program(stm: str) -> list[AST]:
     Parse a statement.
     """
     stms: List[AST] = []
-    ast.parse_string(stm, stms.append, lambda code, msg: None, 1)
+    parse_string(stm, stms.append, lambda code, msg: None, 1)
     return [stm for stm in stms if stm.ast_type == ASTType.Rule]
 
 
@@ -27,7 +38,7 @@ def parse_statement(stm: str) -> AST:
     Parse a statement.
     """
     stms: List[AST] = []
-    ast.parse_string(stm, stms.append, lambda code, msg: None, 1)
+    parse_string(stm, stms.append, lambda code, msg: None, 1)
     if len(stms) != 2:
         raise RuntimeError(
             f"syntax error: stm must contain exactly one statement, {len(stms)} given"

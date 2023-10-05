@@ -1,4 +1,4 @@
-from typing import AbstractSet
+from typing import AbstractSet, Optional
 
 from clingo import ast
 from clingo.ast import AST, ASTType
@@ -9,7 +9,7 @@ from rule import Rule, program_rules
 from util import head_as_disjunction
 
 
-def _encode_literal(literal: AST, prefix: str, sign: ast.Sign = None) -> AST:
+def _encode_literal(literal: AST, prefix: str, sign: Optional[ast.Sign] = None) -> AST:
     new_lit = ast.Literal(
         literal.location,
         sign if sign is not None else literal.sign,

@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import AbstractSet, Sequence
+from typing import AbstractSet, Optional, Sequence
 
 from clingo.ast import AST, ASTType, parse_files
 from clingo.symbol import Symbol
@@ -19,7 +19,7 @@ def sccs_to_str(sccs: list[list[AST]]) -> str:
 
 
 class Grounder(ABC):
-    def __init__(self, instantiator: Instantiator = None) -> None:
+    def __init__(self, instantiator: Optional[Instantiator] = None) -> None:
         self._program: list[AST] = []
         if not instantiator:
             instantiator = Instantiator()
@@ -82,7 +82,11 @@ def strongly_connected_components(program: Sequence[AST]) -> list[list[AST]]:
     raise NotImplementedError
 
 
-class GrounderWithDependencies(BottomUpGrounder):
+class GrounderWithDependencies(Grounder):
+    def __init__(self, instantiator: Optional[Instantiator] = None) -> None:
+        super().__init__(instantiator)
+        self.bootom_up_grounder = BottomUpGrounder(self.instantiator)
+
     def _grounding_algorithm(
         self, program: list[AST], atoms: AbstractSet[Symbol] = frozenset()
     ) -> tuple[list[Rule], set[Symbol]]:

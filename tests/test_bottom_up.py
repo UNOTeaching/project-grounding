@@ -20,12 +20,12 @@ class TestGroundBottomUp(unittest.TestCase):
 
     def test_rules_basic(self):
         grounder = BottomUpGrounder()
-        atoms = frozenset([
+        atoms = [
             Function("b", [Number(1)]),
             Function("b", [Number(2)]),
             Function("b", [Number(3)]),
             Function("a", [Number(1)]),
-        ])
+        ]
         self.assertCountEqual(
             [
                 str(rule)
