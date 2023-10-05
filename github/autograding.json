@@ -1,0 +1,74 @@
+{
+  "tests": [
+    {
+      "name": "q0",
+      "setup": "",
+      "run": "ls group.txt",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "q1",
+      "setup": "conda install python=3.9 --yes; conda install -c potassco clingo=3.6.2 --yes; /usr/share/miniconda/bin/python3.9 -m pip install clingox",
+      "run": "/usr/share/miniconda/bin/python3.9 autograder.py --question=1",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 30
+    },
+    {
+      "name": "q2a",
+      "setup": "conda install python=3.9 --yes; conda install -c potassco clingo=3.6.2 --yes; /usr/share/miniconda/bin/python3.9 -m pip install clingox",
+      "run": "/usr/share/miniconda/bin/python3.9 autograder.py --question=2a",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "q2b",
+      "setup": "conda install python=3.9 --yes; conda install -c potassco clingo=3.6.2 --yes; /usr/share/miniconda/bin/python3.9 -m pip install clingox",
+      "run": "/usr/share/miniconda/bin/python3.9 autograder.py --question=2b",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 20
+    },
+    {
+      "name": "q2c",
+      "setup": "conda install python=3.9 --yes; conda install -c potassco clingo=3.6.2 --yes; /usr/share/miniconda/bin/python3.9 -m pip install clingox",
+      "run": "/usr/share/miniconda/bin/python3.9 autograder.py --question=2c",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5
+    },
+    {
+      "name": "q2d",
+      "setup": "conda install python=3.9 --yes; conda install -c potassco clingo=3.6.2 --yes; /usr/share/miniconda/bin/python3.9 -m pip install clingox",
+      "run": "/usr/share/miniconda/bin/python3.9 autograder.py --question=2d",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5
+    },
+    {
+      "name": "q3",
+      "setup": "conda install python=3.9 --yes; conda install -c potassco clingo=3.6.2 --yes; /usr/share/miniconda/bin/python3.9 -m pip install clingox",
+      "run": "/usr/share/miniconda/bin/python3.9 autograder.py --question=3",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 30
+    }
+  ]
+}
