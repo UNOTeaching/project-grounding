@@ -16,9 +16,13 @@ if sys.version_info < (3, 9):
 GITHUB_AUTOGRADE_DIR = os.path.join(".github", "classroom")
 GITHUB_AUTOGRADE_FILE = os.path.join(GITHUB_AUTOGRADE_DIR, "autograding.json")
 GITHUB_AUTOGRADE_BACK = os.path.join("github", "autograding.json")
-if not os.path.exists(GITHUB_AUTOGRADE_FILE):
-    os.makedirs(GITHUB_AUTOGRADE_DIR, exist_ok=True)
-    shutil.copy(GITHUB_AUTOGRADE_BACK, GITHUB_AUTOGRADE_FILE)
+try:
+    if os.path.exists(".git"):
+        os.makedirs(GITHUB_AUTOGRADE_DIR, exist_ok=True)
+        shutil.copy(GITHUB_AUTOGRADE_BACK, GITHUB_AUTOGRADE_FILE)
+        os.system(f"git add {GITHUB_AUTOGRADE_FILE}")
+except Exception as e:
+    pass
 
 
 class Question(ABC):
