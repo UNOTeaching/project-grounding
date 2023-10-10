@@ -43,7 +43,7 @@ The framework is composed of the following files:
 | util.py          | Contains helpful function to simplify you code |
 | autograder.py    | The autrograder |
 
-The ```grounder.py`` program contains three main subcommands
+The ```grounder.py``` program contains three main subcommands
 The framework is composed of the following files:
 | subcomand             | description           |
 | ---------------- | ----------------------|
