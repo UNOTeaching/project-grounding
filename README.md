@@ -158,7 +158,7 @@ Let ```rule3``` be the rule
 ```
 holds(path,X,Y) :- not holds(omit,X,Y), holds(edge,X,Y).
 ```
-Under the definition used in this project ```rule3``` depends on itself. However, under the unification-based definition, ```rule3``` does not, becase ```holds(path,X,Y)``` does not unify neither with ```holds(omit,X,Y)``` nor with ```holds(edge,X,Y)``` .
+Under the definition used in this project ```rule3``` depends on itself. However, under the unification-based definition, ```rule3``` does not, becase ```holds(path,X,Y)``` does unify neither with ```holds(omit,X,Y)``` nor with ```holds(edge,X,Y)``` .
 
 To help you in the implementation of this function, file ```utils.py``` contains functions
 ```python
