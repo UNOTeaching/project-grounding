@@ -23,7 +23,7 @@ Do not modify the file ```autograder.py``` nor any of the content of the directo
 
 ## Framework
 
-This project requires Python 3.9 or higher and the ```clingo``` Python package with a version 5.5 or higher. You can check your installation by running the following commands:
+This project requires Python 3.9 or higher and the ```clingo``` Python package with a version 5.6.2. You can check your installation by running the following commands:
 ```bash
 python --version
 python -c "import clingo; print(clingo.__version__)"
