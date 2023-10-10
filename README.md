@@ -32,6 +32,11 @@ If you are missing the ```clingo``` package, you can install it with ```pip```:
 ```bash
 python -m pip install clingo==5.6.2
 ```
+You will also need the ```clingox``` package , you can install it with ```pip```:
+```bash
+python -m pip install clingox==1.2.0
+```
+
 The framework is composed of the following files:
 | file             | description           |
 | ---------------- | ----------------------|
