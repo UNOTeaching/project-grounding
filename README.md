@@ -270,7 +270,7 @@ python autograder.py --question=2c
 
 ### Question 2d: Taking care of rules without dependencies (5 points)
 
-In this question, you will revisit the code in the previous questions and ensure that rules that neither depend on any other rule nor any other rule depends on them are also included in the strongly connected components. To do so, you will modify the function ```dependency_graph()``` and ensure the second component of the pair returned by the function is the list of these rules. You may also need to modify the function ```strongly_connected_components()``` to ensure that the list of strongly connected components returned by the previous function is handled correctly.
+In this question, you will revisit the code in the previous questions and ensure that rules that neither depend on any other rule nor any other rule depends on them are also included in the strongly connected components. To do so, you will modify the function ```dependency_graph()``` and ensure that the second component of the pair returned by the function is the list of these rules. You may also need to modify the function ```strongly_connected_components()``` to ensure that the list of strongly connected components returned by the previous function is handled correctly.
 
 You can check your code using the autograder by running command
 ```sh
