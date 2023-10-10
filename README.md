@@ -254,7 +254,7 @@ are in the same strongly connected component. You may noitice that this is diffe
 
 
 To obtain this list, you can use the function ```dependency_graph()``` you implemented in [Question 2b](#question-2b-dependency-graph-20-points) and the function
-```
+```python
 def sccs(self) -> list[list[T]]:
 ```
 from the ```Graph``` class in file ```tarjan.py```. You can check your code using the autograder by running command
