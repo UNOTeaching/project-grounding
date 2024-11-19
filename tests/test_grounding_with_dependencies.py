@@ -7,6 +7,9 @@ from util import parse_program
 
 
 class TestGroundWithDependencies(unittest.TestCase):
+
+    maxDiff = None
+
     def test_fact(self):
         grounder = GrounderWithDependencies()
         ground_program, _ = grounder._grounding_algorithm(parse_program("node(a)."))
@@ -94,6 +97,46 @@ class TestGroundWithDependencies(unittest.TestCase):
                 )[0]
             ],
             ["b(1) :- a(1).", "b(1).", "b(2).", "b(3).", "a(1)."],
+        )
+
+    def test_recursion(self):
+        expected_result = [
+            ("even(a).", 2),
+            ("next(d,e).", 2),
+            ("next(c,d).", 2),
+            ("next(b,c).", 2),
+            ("next(a,b).", 2),
+            ("even(c) :- next(b,c), odd(b).", 4),
+            ("even(e) :- next(d,e), odd(d).", 2),
+            ("odd(b) :- next(a,b), even(a).", 5),
+            ("odd(d) :- next(c,d), even(c).", 3),
+        ]
+        expected_ground_rules = [rule for rule, n in expected_result for _ in range(n)]
+        expected_result = [rule for rule, _ in expected_result]
+        grounder = GrounderWithDependencies()
+        self.assertCountEqual(
+            [
+                str(rule)
+                for rule in grounder._grounding_algorithm(
+                    parse_program(
+                        """\
+                        even(Y) :-  odd(X), next(X,Y).
+                        odd(Y)  :- even(X), next(X,Y).
+                        even(a).
+                        next(a,b).
+                        next(b,c).
+                        next(c,d).
+                        next(d,e).
+                    """
+                    )
+                )[0]
+            ],
+            expected_result,
+        )
+
+        self.assertCountEqual(
+            [str(rule) for rule in grounder.instantiator.grounded_rules],
+            expected_ground_rules,
         )
 
 

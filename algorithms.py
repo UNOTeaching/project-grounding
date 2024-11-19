@@ -85,7 +85,7 @@ def strongly_connected_components(program: Sequence[AST]) -> list[list[AST]]:
 class GrounderWithDependencies(Grounder):
     def __init__(self, instantiator: Optional[Instantiator] = None) -> None:
         super().__init__(instantiator)
-        self.bootom_up_grounder = BottomUpGrounder(self.instantiator)
+        self.bottom_up_grounder = BottomUpGrounder(self.instantiator)
 
     def _grounding_algorithm(
         self, program: list[AST], atoms: AbstractSet[Symbol] = frozenset()

@@ -5,6 +5,8 @@ from algorithms import BottomUpGrounder
 from clingo.symbol import Function, Number
 from util import parse_program
 
+unittest.TestCase.maxDiff = None
+
 
 class TestGroundBottomUp(unittest.TestCase):
     def test_fact(self):
